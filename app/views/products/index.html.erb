@@ -15,9 +15,10 @@
           <td><%= product.description %></td>
           <td><%= product.price %></td>
           <td><%= product.stock %></td>
-          <td>
-            <a href = "products/<%= product.id %>/edit" class = "btn btn-primary">Edit</a>
-            <%= link_to "Delete", product, method: :delete, class: "btn btn-danger" %>
+          <td style = "text-align:center; width: 15%">
+            <%= button_to "Edit", product, method: :edit, class: "btn btn-primary" %>
+            <%= button_to "Delete", product, method: :delete, class: "btn btn-danger",
+          data: {confirm: "Are you sure you want to remove #{product.name}"} %>
           </td>
         </tr>
       <% end %>
@@ -41,9 +42,10 @@
           <td><%= product.description %></td>
           <td><%= product.price %></td>
           <td><%= product.stock %></td>
-          <td>
-            <a href = "products/<%= product.id %>/edit" class = "btn btn-primary">Edit</a>
-            <%= link_to "Delete", product, method: :delete, class: "btn btn-danger" %>
+          <td style = "text-align:center; width: 15%">
+            <%= button_to "Edit", product, method: :edit, class: "btn btn-primary" %>
+            <%= button_to "Delete", product, method: :delete, class: "btn btn-danger",
+          data: {confirm: "Are you sure you want to remove #{product.name}"} %>
           </td>
         </tr>
       <% end %>

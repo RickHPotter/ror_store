@@ -14,8 +14,14 @@
     <%= nav_bar brand: "RoR Store", brand_link: root_url do %>
       <%= menu_group do %>
         <%= menu_item "Home", root_url %>
-        <%= menu_item "Products", products_url %>
-        <%= menu_item "New Product", products_new_url %>
+        <%= menu_item "Products", products_path %>
+        <%= menu_item "New Product", new_product_path %>
+      <% end %>
+      <%= form_tag search_product_path, class: "navbar-form navbar-right", method: :get do %>
+        <div class = "form-group">
+          <%= text_field_tag :name, @name, class: "form-control" %>
+          <%= button_to "Seach", nil, class: "btn btn-default" %>
+        </div>
       <% end %>
     <% end %>
     <%= yield %>
