@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-  </head>
+<div class="container">
+    <%= form_for Product.new do |form| %>
+      <div class = "row">
+        <div class = "col-sm-8">
+          <div class = "form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-8">
+          <div class = "form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: "form-control", rows: 4 %>
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-4">
+          <div class = "form-group">
+            <%= form.label :price %>
+            <%= form.number_field :price, class: "form-control", step: "0.1" %>
+          </div>
+        </div>
+        <div class = "col-sm-4">
+          <div class = "form-group">
+            <%= form.label :stock %>
+            <%= form.number_field :stock, class: "form-control" %>
+          </div>
+        </div>
+      </div>
 
-  <body>
-    <%= nav_bar do %>
-      <%= menu_group do %>
-        <%= menu_item "Home", root_url %>
-        <%= menu_item "Products", products_url %>
-        <%= menu_item "Contact", "#" %>
-      <% end %>
+      <%= form.submit "Submit", class: "btn btn-primary" %>
     <% end %>
-    <div class="container">
-        <%= form_for Product.new do |form| %>
-            Name <input type = "text" name = "product[name]"><br>
-            Description <textarea name = "product[description]"></textarea><br>
-            Price <input type = "number" step = "0.01" name = "product[price]"><br>
-            Stock <input type = "number" name = "product[stock]"><br>
-            
-            <button>Submit</button>
-        <% end %>
-
-      </form>
-    </div>
-  </body>
-</html>
+  </form>
+</div>

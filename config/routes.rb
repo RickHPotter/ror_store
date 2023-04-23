@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   get "products", to: "products#index"
   get "products/new", to: "products#new"
   post "products", to: "products#create"
+  get "products/:id/edit", to: "products#edit"
+  delete "products/:id/delete", to: "products#destroy", as: :product
 end

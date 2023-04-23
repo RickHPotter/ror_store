@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RorStore</title>
+    <title>RoR Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <%= nav_bar brand: "RoR Store", brand_link: root_url do %>
+      <%= menu_group do %>
+        <%= menu_item "Home", root_url %>
+        <%= menu_item "Products", products_url %>
+        <%= menu_item "New Product", products_new_url %>
+      <% end %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

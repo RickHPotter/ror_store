@@ -11,4 +11,22 @@ class ProductsController < ApplicationController
     Product.create(product)
     redirect_to root_path
   end
+
+  def edit
+    id = params[:id]
+    product = Product.find_by(id: id)
+    product.update(
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stock: product.stock
+    )
+    redirect_to root_path
+  end
+
+  def destroy
+    id = params[:id]
+    Product.destroy(id)
+    redirect_to root_path
+  end
 end
