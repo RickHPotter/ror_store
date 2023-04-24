@@ -1,0 +1,14 @@
+<% if flash[:notice] %>
+  <div class = "alert alert-success" role = "alert">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<table class="table table-bordered table-hover">
+  <%= render :partial => "products/product_head" %>
+  <%= render @products_by_dep %>
+</table>
+
+<div>
+  <%= link_to "Edit Department", edit_department_path(@department), class: "btn btn-default" %>
+  <%= link_to "Back", departments_path, class: "btn btn-default" %>
+</div>

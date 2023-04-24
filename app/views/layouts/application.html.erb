@@ -13,9 +13,9 @@
   <body>
     <%= nav_bar brand: "RoR Store", brand_link: root_url do %>
       <%= menu_group do %>
-        <%= menu_item "Home", root_url %>
         <%= menu_item "Products", products_path %>
         <%= menu_item "New Product", new_product_path %>
+        <%= menu_item "Departments", departments_path %>
       <% end %>
       <%= form_tag search_product_path, class: "navbar-form navbar-right", method: :get do %>
         <div class = "form-group">
@@ -24,6 +24,8 @@
         </div>
       <% end %>
     <% end %>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Departments</h1>
+
+<table class = "table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan = "3"></th>
+    <tr>
+  </thead>
+  
+  <tbody id="departments">
+    <% @departments.each do |department| %>
+      <%# <%= render department %>
+      <tr>
+        <td style = "width: 60%" ><%= department.name %></td>
+        <td><%= link_to "Show", department, class: "btn btn-primary" %></td>
+        <td><%= link_to "Edit", edit_department_path(department.id), class: "btn btn-primary" %></td>
+        <td><%= button_to "Delete", department, method: :delete, class: "btn btn-danger",
+        data: {confirm: "Are you sure you want to remove #{department.name}"} %></td>
+      </tr>
+    <% end %>
+  </div>
+</table>
+
+<%= link_to "New Department", new_department_path, class: "btn btn-default" %>

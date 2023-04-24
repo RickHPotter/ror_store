@@ -1,32 +1,65 @@
 # Products Controller
 class ProductsController < ApplicationController
+  before_action :set_product, only: %i[edit update destroy]
+
+  private
+
+  def product_params
+    params.require(:product).permit(
+      :name,
+      :description,
+      :department_id,
+      :price,
+      :stock
+    )
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def _render(view)
+    @department = Department.all
+    render view
+  end
+
+  public
+
   def index
     @products = Product.order(name: :asc)
     @on_sale = Product.order(:price).limit(1)
     @products_not_on_sale = @products.select { |prod| @on_sale.exclude? prod }
   end
 
+  def new
+    @department = Department.all
+    @product = Product.new
+  end
+
   def create
-    product =
-      params.require(:product).permit(:name, :description, :price, :stock)
-    Product.create(product)
-    redirect_to root_path
+    @product = Product.new(product_params)
+    if @product.save
+      flash[:notice] = "Poduct saved successfully."
+      redirect_to root_path
+    else
+      _render :new
+    end
   end
 
   def edit
-    product_id = params[:id]
-    product = Product.find_by(id: product_id)
-    product.update(
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      stock: product.stock
-    )
-    redirect_to root_path
+    _render :edit
+  end
+
+  def update
+    if @product.update(product_params)
+      flash[:notice] = "Product updated successfully."
+      redirect_to root_path
+    else
+      _render :edit
+    end
   end
 
   def destroy
-    id = params[:id]
     Product.destroy(id)
     redirect_to root_path
   end
