@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Products Controller
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[edit update destroy]
@@ -39,7 +41,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      flash[:notice] = "Poduct saved successfully."
+      flash[:notice] = 'Poduct saved successfully.'
       redirect_to root_path
     else
       _render :new
@@ -52,7 +54,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      flash[:notice] = "Product updated successfully."
+      flash[:notice] = 'Product updated successfully.'
       redirect_to root_path
     else
       _render :edit
@@ -66,6 +68,6 @@ class ProductsController < ApplicationController
 
   def search
     @name = params[:name]
-    @search = Product.where "name like ?", "%#{@name}%"
+    @search = Product.where 'name like ?', "%#{@name}%"
   end
 end
