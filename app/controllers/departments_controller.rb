@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# -
 class DepartmentsController < ApplicationController
   before_action :set_department, only: %i[show edit update destroy]
 
@@ -11,7 +12,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/1 or /departments/1.json
   def show
     # @products_by_dep = Product.where(department: @department)
-    @products_by_dep = Product.where('department_id = ?', @department.id)
+    @products_by_dep = Product.where("department_id = ?", @department.id)
   end
 
   # GET /departments/new
@@ -20,7 +21,8 @@ class DepartmentsController < ApplicationController
   end
 
   # GET /departments/1/edit
-  def edit; end
+  # def edit
+  # end
 
   # POST /departments or /departments.json
   def create
@@ -29,8 +31,8 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @department.save
         format.html do
-          redirect_to department_url(@department),
-                      notice: 'Department was successfully created.'
+          redirect_to departments_url,
+                      notice: "Department was successfully created."
         end
         format.json { render :show, status: :created, location: @department }
       else
@@ -47,8 +49,8 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @department.update(department_params)
         format.html do
-          redirect_to department_url(@department),
-                      notice: 'Department was successfully updated.'
+          redirect_to departments_url,
+                      notice: "#{@department.name} was successfully updated."
         end
         format.json { render :show, status: :ok, location: @department }
       else
@@ -62,15 +64,14 @@ class DepartmentsController < ApplicationController
 
   # DELETE /departments/1 or /departments/1.json
   def destroy
-    return if Product.find_by(deparment_id: @department.id)
-
-    @department.destroy
-
+    if Product.any? { |prod| prod.department_id.to_s == params[:id] }
+      msg = "Cannot delete #{@department.name} because it has Products."
+    else
+      @department.destroy
+      msg = "#{@department.name} was successfully deleted."
+    end
     respond_to do |format|
-      format.html do
-        redirect_to departments_url,
-                    notice: 'Department was successfully destroyed.'
-      end
+      format.html { redirect_to departments_url, notice: msg }
       format.json { head :no_content }
     end
   end

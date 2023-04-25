@@ -62,7 +62,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    Product.destroy(id)
+    Product.destroy(params[:id])
     redirect_to root_path
   end
 
